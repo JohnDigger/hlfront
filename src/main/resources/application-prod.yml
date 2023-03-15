@@ -1,0 +1,45 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: hl-front
+  mvc:
+    static-path-pattern: /file/** # 设置该路径下访问上传文件资源
+  servlet:
+    multipart:
+      max-file-size: 1000MB # 配置上传文件的限制
+      max-request-size: 50MB
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://36.133.200.169:3306/hl-admin?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: sctu@123456
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 600000
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    host: localhost
+    password:
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+# mybatis plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
